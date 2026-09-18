@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Memory V0</title>
+  <meta name="theme-color" content="#111111" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <button id="homeBtn" class="brand">MEMORY</button>
+    <button id="newBtn" class="ghost">+ Tạo mới</button>
+  </header>
+
+  <main class="shell">
+    <section id="homeView" class="view">
+      <div class="hero card">
+        <div class="eyebrow">MEMORY V0</div>
+        <h1>Một nơi nhỏ để giữ 5 khoảnh khắc.</h1>
+        <p>Tạo Memory, đặt PIN chỉnh sửa, rồi mở lại bằng một đường link riêng.</p>
+        <button id="startBtn" class="primary">Tạo Memory</button>
+      </div>
+
+      <div class="card">
+        <h2>Memory trên thiết bị này</h2>
+        <div id="memoryList" class="memory-list empty-state">Chưa có Memory nào.</div>
+      </div>
+    </section>
+
+    <section id="createView" class="view hidden">
+      <div class="card">
+        <div class="eyebrow">TẠO MEMORY</div>
+        <h1>5 ảnh, một lời nhắn.</h1>
+        <form id="createForm">
+          <label>Tiêu đề
+            <input id="titleInput" maxlength="60" placeholder="Ví dụ: Đà Lạt · 2026" required />
+          </label>
+
+          <label>Lời nhắn
+            <textarea id="messageInput" maxlength="240" rows="4" placeholder="Một điều bạn muốn giữ lại..."></textarea>
+          </label>
+
+          <label>Link bài hát <span class="muted">(không bắt buộc)</span>
+            <input id="songInput" inputmode="url" placeholder="https://..." />
+          </label>
+
+          <label>PIN chỉnh sửa
+            <input id="pinInput" inputmode="numeric" pattern="[0-9]{4,8}" maxlength="8" placeholder="4–8 chữ số" required />
+          </label>
+
+          <label>Chọn tối đa 5 ảnh
+            <input id="photosInput" type="file" accept="image/*" multiple />
+          </label>
+
+          <div id="photoPreview" class="photo-grid"></div>
+          <p class="hint">Ảnh được nén trước khi lưu để bản thử nghiệm nhẹ hơn.</p>
+
+          <button class="primary" type="submit">Tạo Memory</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="memoryView" class="view hidden">
+      <div id="memoryCard" class="memory-page card"></div>
+    </section>
+
+    <section id="editView" class="view hidden">
+      <div class="card">
+        <div class="eyebrow">CHỈNH SỬA MEMORY</div>
+        <div id="unlockBox">
+          <h2>Nhập PIN</h2>
+          <div class="inline">
+            <input id="editPinInput" inputmode="numeric" maxlength="8" placeholder="PIN" />
+            <button id="unlockBtn" class="primary compact">Mở</button>
+          </div>
+          <p id="pinError" class="error"></p>
+        </div>
+
+        <form id="editForm" class="hidden">
+          <label>Tiêu đề
+            <input id="editTitleInput" maxlength="60" required />
+          </label>
+          <label>Lời nhắn
+            <textarea id="editMessageInput" maxlength="240" rows="4"></textarea>
+          </label>
+          <label>Link bài hát
+            <input id="editSongInput" inputmode="url" />
+          </label>
+
+          <div class="section-title">Ảnh hiện tại</div>
+          <div id="editPhotoGrid" class="photo-grid"></div>
+
+          <label>Thêm ảnh
+            <input id="editPhotosInput" type="file" accept="image/*" multiple />
+          </label>
+          <p class="hint">Tối đa 5 ảnh tổng cộng.</p>
+
+          <button class="primary" type="submit">Lưu thay đổi</button>
+          <button id="deleteBtn" class="danger" type="button">Xóa Memory</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
